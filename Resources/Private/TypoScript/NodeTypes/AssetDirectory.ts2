@@ -1,0 +1,32 @@
+prototype(Shel.MediaFrontend:AssetDirectory) < prototype(Content) {
+	configuration = ${Configuration.setting('Shel.MediaFrontend.assetDirectory')}
+
+	attributes.class = 'directory container area'
+	sectionName = 'AssetDirectory'
+
+	arguments = ${request.arguments}
+	assetSearch = ${this.arguments.assetSearch ? this.arguments.assetSearch : {}}
+	searchTag = ${this.assetSearch.tag}
+	searchCollection = ${this.assetSearch.collection}
+
+	assetQuery = ${q(site).assets('', searchTag, searchCollection).get()}
+
+	rawAssetQuery = ${this.assetQuery.assets}
+	tags = ${this.assetQuery.tags}
+	collections = ${node.properties.selectableCollections}
+
+	itemRenderer = Shel.MediaFrontend:Asset
+
+	@cache {
+		mode = 'cached'
+		maximumLifetime = '120'
+		context {
+			format = ${request.format}
+			assetDirectoryPaginationArgument = ${request.pluginArguments['asset-directory-pagination'].currentPage}
+			node = ${node}
+		}
+	}
+}
+
+prototype(TYPO3.Neos:Page).@cache.entryIdentifier.assetDirectoryPaginationArgument = ${request.pluginArguments['asset-directory-pagination'].currentPage}
+root.@cache.entryIdentifier.assetDirectoryPaginationArgument = ${request.pluginArguments['asset-directory-pagination'].currentPage}

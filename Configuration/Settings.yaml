@@ -1,0 +1,12 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        'Shel.MediaFrontend': TRUE
+
+Shel:
+  MediaFrontend:
+    assetDirectory:
+      pagination:
+        itemsPerPage: 6
+        maximumNumberOfLinks: 10

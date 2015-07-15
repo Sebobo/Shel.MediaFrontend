@@ -1,0 +1,15 @@
+prototype(Shel.MediaFrontend:Asset) < prototype(Content) {
+	templatePath = 'resource://Shel.MediaFrontend/Private/Templates/TypoScriptObjects/Asset.html'
+	sectionName = 'Asset'
+
+	asset = ${asset}
+	assetCollections = ${node.properties.mainCollection ? q(asset.assetCollections).filter('[title != ' + node.properties.mainCollection + ']') : asset.assetCollections}
+
+	@cache {
+		mode = 'cached'
+		maximumLifetime = '120'
+		entryIdentifier {
+			assetId = ${asset.identifier}
+		}
+	}
+}

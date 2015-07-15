@@ -1,0 +1,36 @@
+'Shel.MediaFrontend:AssetDirectory':
+  superTypes:
+    'TYPO3.Neos:Content': TRUE
+    'TYPO3.Neos.NodeTypes:TitleMixin': TRUE
+  ui:
+    label: 'Asset directory'
+    icon: 'icon-file'
+    inspector:
+      groups:
+        resources:
+          label: 'Resources'
+          position: 5
+  properties:
+    mainCollection:
+      type: string
+      ui:
+        label: 'Main asset collection'
+        reloadIfChanged: TRUE
+        inspector:
+          group: resources
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            multiple: FALSE
+            placeholder: 'Choose main collection'
+            dataSourceIdentifier: 'shel-mediafrontend-assetcollections'
+    selectableCollections:
+      type: array
+      ui:
+        label: 'Selectable collections'
+        reloadIfChanged: TRUE
+        inspector:
+          group: resources
+          editorOptions:
+            multiple: TRUE
+            placeholder: 'Choose available languages'
+            dataSourceIdentifier: 'shel-mediafrontend-assetcollections'
