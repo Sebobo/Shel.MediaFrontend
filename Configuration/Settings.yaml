@@ -3,6 +3,9 @@ TYPO3:
     typoScript:
       autoInclude:
         'Shel.MediaFrontend': TRUE
+  TypoScript:
+    defaultContext:
+      MediaFrontend: 'Shel\MediaFrontend\Eel\Helper\MediaFrontendHelper'
 
 Shel:
   MediaFrontend:

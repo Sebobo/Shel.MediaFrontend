@@ -3,7 +3,9 @@
 			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
 	<f:section name="Asset">
 		<li class="panel">
-			<p class="accordion__title h3">{asset.label}</p>
+			<p class="accordion__title h3">
+				<a href="{f:uri.resource(resource: asset.resource)}" title="Download" target="_blank">{asset.label}</a>
+			</p>
 			<div class="accordion__details">
 				<p>{asset.caption}</p>
 			</div>
@@ -25,11 +27,11 @@
 					</strong>
 				</f:if>
 				<strong>
-					<i class="fa fa-file-o fa-file-{asset.fileExtension}-o"></i>
+					{icon -> f:format.raw()}
 					{asset.fileExtension -> f:format.case(mode: 'upper')}
 				</strong>
 				<strong class="pull-right">
-					<time>{f:format.date(date: asset.lastModified)}</time>
+					<time>{f:format.date(date: asset.lastModified, format: 'd/m/Y')}</time>
 				</strong>
 			</div>
 		</li>

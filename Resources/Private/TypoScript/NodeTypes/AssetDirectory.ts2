@@ -4,29 +4,27 @@ prototype(Shel.MediaFrontend:AssetDirectory) < prototype(Content) {
 	attributes.class = 'directory container area'
 	sectionName = 'AssetDirectory'
 
+	collections = ${node.properties.selectableCollections}
+
 	arguments = ${request.arguments}
 	assetSearch = ${this.arguments.assetSearch ? this.arguments.assetSearch : {}}
-	searchTag = ${this.assetSearch.tag}
-	searchCollection = ${this.assetSearch.collection}
+	searchWord = ${this.assetSearch.searchWord}
+	selectedTag = ${this.assetSearch.tag}
+	selectedCollection = ${this.assetSearch.collection}
 
-	assetQuery = ${q(site).assets('', searchTag, searchCollection).get()}
+	assetQuery = ${q(site).assets(this.searchWord, node.properties.mainCollection, this.selectedTag, this.selectedCollection != '' ? this.collections[this.selectedCollection] : '').get()}
 
 	rawAssetQuery = ${this.assetQuery.assets}
 	tags = ${this.assetQuery.tags}
-	collections = ${node.properties.selectableCollections}
 
 	itemRenderer = Shel.MediaFrontend:Asset
 
 	@cache {
-		mode = 'cached'
-		maximumLifetime = '120'
+		mode = 'uncached'
 		context {
-			format = ${request.format}
-			assetDirectoryPaginationArgument = ${request.pluginArguments['asset-directory-pagination'].currentPage}
-			node = ${node}
+			1 = 'node'
+			2 = 'documentNode'
+			3 = 'site'
 		}
 	}
 }
-
-prototype(TYPO3.Neos:Page).@cache.entryIdentifier.assetDirectoryPaginationArgument = ${request.pluginArguments['asset-directory-pagination'].currentPage}
-root.@cache.entryIdentifier.assetDirectoryPaginationArgument = ${request.pluginArguments['asset-directory-pagination'].currentPage}

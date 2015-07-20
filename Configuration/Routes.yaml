@@ -1,6 +1,6 @@
 -
   name: 'Asset directory paginate'
-  uriPattern: '{node}/page/{--asset-directory-pagination.currentPage}.html'
+  uriPattern: '{node}/documents-page/{--asset-directory-pagination.currentPage}.html'
   defaults:
     '@package': 'TYPO3.Neos'
     '@controller': 'Frontend\Node'
