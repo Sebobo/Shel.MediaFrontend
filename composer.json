@@ -4,6 +4,7 @@
     "description": "Content elements and utilities for media in Neos CMS",
     "require": {
       "typo3/neos": "~2.0.0",
+      "typo3/neos-nodetypes": "~2.0.0",
       "typo3/flow": "~3.0",
       "typo3/media": "~2.0.0"
     },
