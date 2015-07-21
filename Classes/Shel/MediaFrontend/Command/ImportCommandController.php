@@ -2,13 +2,9 @@
 namespace Shel\MediaFrontend\Command;
 
 /*                                                                        *
- * This script belongs to the Flow package "Shel.Importer".               *
+ * This script belongs to the Flow package "Shel.MediaFrontend".          *
  *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU General Public License, either version 3 of the   *
- * License, or (at your option) any later version.                        *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
+ * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use Shel\MediaFrontend\Service\ImportAssetService;
@@ -28,7 +24,7 @@ class ImportCommandController extends CommandController {
 	protected $importAssetService;
 
 	/**
-	 * Import resources to asset management
+	 * Import files from a folder as resources to the asset management
 	 *
 	 * This command imports files from the file system and imports them as assets for Neos.
 	 * The type of the imported asset is determined by the file extension provided by the
@@ -37,7 +33,7 @@ class ImportCommandController extends CommandController {
 	 * @param string $path The folder which the files should be read from
 	 * @param boolean $simulate If set, this command will only tell what it would do instead of doing it right away
 	 */
-	public function assetsCommand($path, $simulate = FALSE) {
+	public function filesCommand($path, $simulate = FALSE) {
 		$path = realpath($path);
 		$this->outputFormatted("Importing assets from %s", array($path));
 
@@ -57,9 +53,11 @@ class ImportCommandController extends CommandController {
 	}
 
 	/**
+	 * Completely removes previously imported resources from asset management
+	 *
 	 * @param boolean $simulate
 	 */
-	public function undoCommand($simulate = FALSE) {
+	public function purgeCommand($simulate = FALSE) {
 		$this->importAssetService->removeImportedAssets($simulate, function ($assetsRemoved, $simulate) {
 			if ($simulate) {
 				$this->outputFormatted("Would have removed %d assets", array($assetsRemoved));

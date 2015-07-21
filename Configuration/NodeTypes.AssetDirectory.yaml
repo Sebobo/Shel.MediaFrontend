@@ -32,5 +32,5 @@
           group: resources
           editorOptions:
             multiple: TRUE
-            placeholder: 'Choose available languages'
+            placeholder: 'Choose filterable collections'
             dataSourceIdentifier: 'shel-mediafrontend-assetcollections'

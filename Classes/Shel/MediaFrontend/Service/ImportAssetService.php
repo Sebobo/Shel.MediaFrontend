@@ -2,7 +2,9 @@
 namespace Shel\MediaFrontend\Service;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Shel.MediaFrontend"     *
+ * This script belongs to the Flow package "Shel.MediaFrontend".          *
+ *                                                                        *
+ * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -102,7 +104,6 @@ class ImportAssetService {
 	/**
 	 * @param \SplFileInfo $file
 	 * @throws \TYPO3\Flow\Resource\Exception
-	 * @internal param \SplFileInfo $path
 	 * @return bool|Asset
 	 */
 	public function importAsset(\SplFileInfo $file) {
@@ -189,7 +190,7 @@ class ImportAssetService {
 
 	/**
 	 * @param $simulate
-	 * @param \Closure|NULL $callback
+	 * @param \Closure $callback
 	 */
 	public function removeImportedAssets($simulate, \Closure $callback = NULL) {
 		$assetCollection = $this->getImportedAssetCollection();

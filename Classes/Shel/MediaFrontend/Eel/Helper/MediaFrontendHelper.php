@@ -3,6 +3,8 @@ namespace Shel\MediaFrontend\Eel\Helper;
 
 /*                                                                        *
  * This script belongs to the Flow package "Shel.MediaFrontend".          *
+ *                                                                        *
+ * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use Doctrine\Common\Collections\Collection;

@@ -5,6 +5,7 @@ namespace Shel\MediaFrontend\DataSource;
 /*                                                                        *
  * This script belongs to the Flow package "Shel.MediaFrontend".          *
  *                                                                        *
+ * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use TYPO3\Media\Domain\Model\AssetCollection;
@@ -36,7 +37,12 @@ class AssetCollections extends AbstractDataSource {
 	 */
 	public function getData(NodeInterface $node = NULL, array $arguments) {
 		$assetCollections = $this->assetCollectionRepository->findAll();
-		$data = array();
+		$data = array(
+			array(
+				'label' => '-',
+				'value' => '',
+			)
+		);
 
 		/** @var AssetCollection $assetCollection */
 		foreach ($assetCollections as $assetCollection) {

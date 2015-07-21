@@ -4,10 +4,10 @@ namespace Shel\MediaFrontend\TypoScript\FlowQueryOperations;
 /*                                                                        *
  * This script belongs to the Flow package "Shel.MediaFrontend".          *
  *                                                                        *
+ * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use TYPO3\Eel\FlowQuery\FlowQueryException;
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Eel\FlowQuery\FlowQuery;
