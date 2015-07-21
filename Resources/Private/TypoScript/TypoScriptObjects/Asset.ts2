@@ -22,6 +22,11 @@ prototype(Shel.MediaFrontend:Asset) < prototype(Content) {
 					renderer = 'fa fa-file-video-o'
 				}
 
+				audio {
+					condition = ${String.startsWith(mediaType, 'audio')}
+					renderer = 'fa fa-file-audio-o'
+				}
+
 				pdf {
 					condition = ${String.endsWith(mediaType, 'pdf')}
 					renderer = 'fa fa-file-pdf-o'
