@@ -11,10 +11,10 @@ namespace Shel\MediaFrontend\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Shel\MediaFrontend\Service\ImportAssetService;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Cli\CommandController;
-use TYPO3\Flow\Utility\MediaTypes;
-use TYPO3\Media\Domain\Model\Image;
+use TYPO3\Media\Domain\Model\Asset;
 
 /**
  * @Flow\Scope("singleton")
@@ -23,26 +23,9 @@ class ImportCommandController extends CommandController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+	 * @var ImportAssetService
 	 */
-	protected $persistenceManager;
-
-	/**
-	 * @Flow\Inject
-	 * @var \Doctrine\Common\Persistence\ObjectManager
-	 */
-	protected $entityManager;
-
-	/**
-	 * @var \Doctrine\DBAL\Connection
-	 */
-	protected $dbalConnection;
-
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\Media\Domain\Repository\AssetRepository
-	 */
-	protected $assetRepository;
+	protected $importAssetService;
 
 	/**
 	 * Import resources to asset management
@@ -51,56 +34,39 @@ class ImportCommandController extends CommandController {
 	 * The type of the imported asset is determined by the file extension provided by the
 	 * Resource object.
 	 *
+	 * @param string $path The folder which the files should be read from
 	 * @param boolean $simulate If set, this command will only tell what it would do instead of doing it right away
-	 * @return void
 	 */
-	public function importResourcesCommand($simulate = FALSE) {
-		$this->initializeConnection();
+	public function assetsCommand($path, $simulate = FALSE) {
+		$path = realpath($path);
+		$this->outputFormatted("Importing assets from %s", array($path));
 
-		// TODO: collect files
-
-//		if ($resourceInfos === array()) {
-//			$this->outputLine('Found no resources which need to be imported.');
-//			$this->quit();
-//		}
-//
-//		foreach ($resourceInfos as $resourceInfo) {
-//			$mediaType = $resourceInfo['mediatype'];
-//
-//			if (substr($mediaType, 0, 6) === 'image/') {
-//				$resource = $this->persistenceManager->getObjectByIdentifier($resourceInfo['persistence_object_identifier'], 'TYPO3\Flow\Resource\Resource');
-//				if ($resource === NULL) {
-//					$this->outputLine('Warning: Resource for file "%s" seems to be corrupt. No resource object with identifier %s could be retrieved from the Persistence Manager.', array($resourceInfo['filename'], $resourceInfo['persistence_object_identifier']));
-//					continue;
-//				}
-//				if (!$resource->getStream()) {
-//					$this->outputLine('Warning: Resource for file "%s" seems to be corrupt. The actual data of resource %s could not be found in the resource storage.', array($resourceInfo['filename'], $resourceInfo['persistence_object_identifier']));
-//					continue;
-//				}
-//				$image = new Image($resource);
-//				if ($simulate) {
-//					$this->outputLine('Simulate: Adding new image "%s" (%sx%s px)', array($image->getResource()->getFilename(), $image->getWidth(), $image->getHeight()));
-//				} else {
-//					$this->assetRepository->add($image);
-//					$this->outputLine('Adding new image "%s" (%sx%s px)', array($image->getResource()->getFilename(), $image->getWidth(), $image->getHeight()));
-//				}
-//			}
-//		}
+		$this->importAssetService->importAssetFolder($path, $simulate, function ($status, $file, $asset, $simulate) {
+			/** @var Asset $asset */
+			/** @var \SplFileInfo $file */
+			$filename = $file->getFilename();
+			if ($simulate) {
+				$this->outputFormatted("* Would import asset %s", array($filename));
+			} else if (!$status) {
+				$this->outputFormatted("* Failed importing asset %s, check the log", array($filename));
+			} else {
+				$mediaType = $asset->getMediaType();
+				$this->outputFormatted("* Imported asset %s of type %s", array($filename, $mediaType));
+			}
+		});
 	}
 
 	/**
-	 * Initializes the DBAL connection which is currently bound to the Doctrine Entity Manager
-	 *
-	 * @return void
+	 * @param boolean $simulate
 	 */
-	protected function initializeConnection() {
-		if (!$this->entityManager instanceof \Doctrine\ORM\EntityManager) {
-			$this->outputLine('This command only supports database connections provided by the Doctrine ORM Entity Manager.
-				However, the current entity manager is an instance of %s.', array(get_class($this->entityManager)));
-			$this->quit(1);
-		}
-
-		$this->dbalConnection = $this->entityManager->getConnection();
+	public function undoCommand($simulate = FALSE) {
+		$this->importAssetService->removeImportedAssets($simulate, function ($assetsRemoved, $simulate) {
+			if ($simulate) {
+				$this->outputFormatted("Would have removed %d assets", array($assetsRemoved));
+			} else {
+				$this->outputFormatted("Removed %d assets", array($assetsRemoved));
+			}
+		});
 	}
 
 }
