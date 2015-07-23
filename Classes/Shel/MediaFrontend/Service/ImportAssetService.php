@@ -91,7 +91,7 @@ class ImportAssetService {
 	public function getImportedAssetCollection() {
 		$collectionName = 'Imported';
 		if ($this->importedAssetCollection == NULL) {
-			$this->importedAssetCollection = $this->assetCollectionRepository->findByTitle($collectionName)->getFirst();
+			$this->importedAssetCollection = $this->assetCollectionRepository->findOneByTitle($collectionName);
 			if ($this->importedAssetCollection == NULL) {
 				$this->systemLogger->log(sprintf('AssetCollection %s for import missing, creating...', $collectionName));
 				$this->importedAssetCollection = new AssetCollection($collectionName);
@@ -111,7 +111,7 @@ class ImportAssetService {
 		$sha1 = sha1_file($filePath);
 
 		/** @var Resource $existingFile */
-		$existingFile = $this->resourceRepository->findByFilename($file->getFilename())->getFirst();
+		$existingFile = $this->resourceRepository->findOneByFilename($file->getFilename());
 		if ($existingFile !== NULL && $existingFile->getSha1() == $sha1) {
 			$this->systemLogger->log(sprintf('Asset %s already exists, import cancelled', $filePath));
 			return FALSE;
