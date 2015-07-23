@@ -117,9 +117,14 @@ class ImportAssetService {
 			return FALSE;
 		}
 
-		$resource = $this->resourceManager->importResource($filePath);
-		if ($resource === NULL) {
-			$this->systemLogger->log(sprintf('Failed to import asset %s', $filePath));
+		try {
+			$resource = $this->resourceManager->importResource($filePath);
+			if ($resource === NULL) {
+				$this->systemLogger->log(sprintf('Failed to import asset %s', $filePath));
+				return FALSE;
+			}
+		} catch (\Exception $e) {
+			$this->systemLogger->log(sprintf('Failed to import asset %s with message %s', $filePath, $e->getMessage()));
 			return FALSE;
 		}
 
