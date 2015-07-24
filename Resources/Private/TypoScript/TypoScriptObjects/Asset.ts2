@@ -6,7 +6,7 @@ prototype(Shel.MediaFrontend:Asset) < prototype(Content) {
 	# Only show collections in the frontend which are also in the facet
 	assetCollections = ${node.properties.selectableCollections ? MediaFrontend.intersectAssetCollections(node.properties.selectableCollections, asset.assetCollections) : asset.assetCollections}
 
-	@override.mediaType = ${asset.mediaType}
+	@context.mediaType = ${asset.mediaType}
 	icon = TYPO3.TypoScript:Tag {
 		tagName = 'i'
 		attributes {
