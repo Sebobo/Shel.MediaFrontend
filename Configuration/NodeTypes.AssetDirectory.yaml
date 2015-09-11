@@ -1,7 +1,7 @@
 'Shel.MediaFrontend:AssetDirectory':
   superTypes:
-    'TYPO3.Neos:Content': TRUE
-    'TYPO3.Neos.NodeTypes:TitleMixin': TRUE
+    'TYPO3.Neos:Content': true
+    'TYPO3.Neos.NodeTypes:TitleMixin': true
   ui:
     label: 'Asset directory'
     icon: 'icon-file'
@@ -11,13 +11,22 @@
           label: 'Resources'
           position: 5
   properties:
+    hideFilters:
+      type: boolean
+      ui:
+        label: Hide filters
+        reloadIfChanged: true
+        inspector:
+          group: resources
+          position: 10
     mainCollection:
       type: string
       ui:
         label: 'Main asset collection'
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
           group: resources
+          position: 20
           editor: 'Content/Inspector/Editors/SelectBoxEditor'
           editorOptions:
             multiple: FALSE
@@ -27,9 +36,10 @@
       type: array
       ui:
         label: 'Selectable collections'
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
           group: resources
+          position: 30
           editorOptions:
             multiple: TRUE
             placeholder: 'Choose filterable collections'

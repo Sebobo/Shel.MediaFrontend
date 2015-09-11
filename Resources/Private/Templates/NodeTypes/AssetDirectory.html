@@ -7,31 +7,35 @@
 		<div{attributes -> f:format.raw()}>
 			<neos:contentElement.editable property="title" tag="h2" />
 
-			<f:form actionUri="{neos:uri.node(node: '.')}" name="assetSearch" absolute="TRUE"
-							method="get" addQueryString="TRUE">
-				<div class="row">
-					<div class="form-group col-sm-4 col-xs-12">
-						<label for="tag">Tag</label>
-						<div class="select-wrapper">
-							<f:form.select id="tag" options="{tags}" prependOptionLabel="Select tag" sortByOptionLabel="TRUE"
-														 optionLabelField="label"
-														 property="tag" class="form-control" value="{selectedTag}" />
-						</div>
-					</div>
-					<div class="form-group col-sm-3 col-xs-8">
-						<label for="collection">Collection</label>
-						<div class="select-wrapper">
-							<f:form.select id="collection" options="{collections}" prependOptionLabel="Select collection"
-														 sortByOptionLabel="TRUE" property="collection" class="form-control"
-														 value="{selectedCollection}" />
-						</div>
-					</div>
+			<f:if condition="{node.properties.hideFilters}">
+				<f:else>
+					<f:form actionUri="{neos:uri.node(node: '.')}" name="assetSearch" absolute="TRUE"
+									method="get" addQueryString="TRUE">
+						<div class="row">
+							<div class="form-group col-sm-4 col-xs-12">
+								<label for="tag">Tag</label>
+								<div class="select-wrapper">
+									<f:form.select id="tag" options="{tags}" prependOptionLabel="Select tag" sortByOptionLabel="TRUE"
+																 optionLabelField="label"
+																 property="tag" class="form-control" value="{selectedTag}" />
+								</div>
+							</div>
+							<div class="form-group col-sm-3 col-xs-8">
+								<label for="collection">Collection</label>
+								<div class="select-wrapper">
+									<f:form.select id="collection" options="{collections}" prependOptionLabel="Select collection"
+																 sortByOptionLabel="TRUE" property="collection" class="form-control"
+																 value="{selectedCollection}" />
+								</div>
+							</div>
 
-					<div class="form-group col-sm-1 col-xs-4">
-						<f:form.button class="btn btn-primary text-center" type="submit"><i class="fa fa-search"></i></f:form.button>
-					</div>
-				</div>
-			</f:form>
+							<div class="form-group col-sm-1 col-xs-4">
+								<f:form.button class="btn btn-primary text-center" type="submit"><i class="fa fa-search"></i></f:form.button>
+							</div>
+						</div>
+					</f:form>
+				</f:else>
+			</f:if>
 
 			<f:if condition="{rawAssetQuery}">
 				<f:then>
