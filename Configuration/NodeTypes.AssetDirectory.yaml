@@ -1,7 +1,6 @@
 'Shel.MediaFrontend:AssetDirectory':
   superTypes:
-    'TYPO3.Neos:Content': true
-    'TYPO3.Neos.NodeTypes:TitleMixin': true
+    'Shel.MediaFrontend:AssetViewMixin': true
   ui:
     label: 'Asset directory'
     icon: 'icon-file'
@@ -29,7 +28,7 @@
           position: 20
           editor: 'Content/Inspector/Editors/SelectBoxEditor'
           editorOptions:
-            multiple: FALSE
+            multiple: false
             placeholder: 'Choose main collection'
             dataSourceIdentifier: 'shel-mediafrontend-assetcollections'
     selectableCollections:
