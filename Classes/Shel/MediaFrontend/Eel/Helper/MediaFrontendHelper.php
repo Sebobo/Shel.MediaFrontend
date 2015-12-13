@@ -16,29 +16,32 @@ use TYPO3\Eel\ProtectedContextAwareInterface;
  *
  * @Flow\Proxy(false)
  */
-class MediaFrontendHelper implements ProtectedContextAwareInterface {
+class MediaFrontendHelper implements ProtectedContextAwareInterface
+{
 
-	/**
-	 * Intersect two asset collection arrays
-	 *
-	 * @param array $availableCollections The available collection titles as strings
-	 * @param Collection $assetCollections The assets selected collections as AssetCollections
-	 * @return array The array with intersected AssetCollections
-	 */
-	public function intersectAssetCollections($availableCollections, Collection $assetCollections) {
-		return $assetCollections->filter(function ($collection) use ($availableCollections) {
-			return in_array($collection->getTitle(), $availableCollections);
-		});
-	}
+    /**
+     * Intersect two asset collection arrays
+     *
+     * @param array $availableCollections The available collection titles as strings
+     * @param Collection $assetCollections The assets selected collections as AssetCollections
+     * @return array The array with intersected AssetCollections
+     */
+    public function intersectAssetCollections($availableCollections, Collection $assetCollections)
+    {
+        return $assetCollections->filter(function ($collection) use ($availableCollections) {
+            return in_array($collection->getTitle(), $availableCollections);
+        });
+    }
 
-	/**
-	 * All methods are considered safe
-	 *
-	 * @param string $methodName
-	 * @return boolean
-	 */
-	public function allowsCallOfMethod($methodName) {
-		return TRUE;
-	}
+    /**
+     * All methods are considered safe
+     *
+     * @param string $methodName
+     * @return boolean
+     */
+    public function allowsCallOfMethod($methodName)
+    {
+        return true;
+    }
 
 }

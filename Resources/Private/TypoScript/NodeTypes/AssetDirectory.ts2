@@ -1,30 +1,30 @@
 prototype(Shel.MediaFrontend:AssetDirectory) < prototype(Content) {
-	configuration = ${Configuration.setting('Shel.MediaFrontend.assetDirectory')}
+    configuration = ${Configuration.setting('Shel.MediaFrontend.assetDirectory')}
 
-	attributes.class = 'directory container area'
-	sectionName = 'AssetDirectory'
+    attributes.class = 'directory container area'
+    sectionName = 'AssetDirectory'
 
-	collections = ${node.properties.selectableCollections}
+    collections = ${node.properties.selectableCollections}
 
-	arguments = ${request.arguments}
-	assetSearch = ${this.arguments.assetSearch ? this.arguments.assetSearch : {}}
-	searchWord = ${this.assetSearch.searchWord}
-	selectedTag = ${this.assetSearch.tag}
-	selectedCollection = ${this.assetSearch.collection}
+    arguments = ${request.arguments}
+    assetSearch = ${this.arguments.assetSearch ? this.arguments.assetSearch : {}}
+    searchWord = ${this.assetSearch.searchWord}
+    selectedTag = ${this.assetSearch.tag}
+    selectedCollection = ${this.assetSearch.collection}
 
-	assetQuery = ${q(site).assets(this.searchWord, node.properties.mainCollection, this.selectedTag, this.selectedCollection != '' ? this.collections[this.selectedCollection] : '').get()}
+    assetQuery = ${q(site).assets(this.searchWord, node.properties.mainCollection, this.selectedTag, this.selectedCollection != '' ? this.collections[this.selectedCollection] : '').get()}
 
-	rawAssetQuery = ${this.assetQuery.assets}
-	tags = ${this.assetQuery.tags}
+    rawAssetQuery = ${this.assetQuery.assets}
+    tags = ${this.assetQuery.tags}
 
-	itemRenderer = Shel.MediaFrontend:Asset
+    itemRenderer = Shel.MediaFrontend:Asset
 
-	@cache {
-		mode = 'uncached'
-		context {
-			1 = 'node'
-			2 = 'documentNode'
-			3 = 'site'
-		}
-	}
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+        }
+    }
 }
