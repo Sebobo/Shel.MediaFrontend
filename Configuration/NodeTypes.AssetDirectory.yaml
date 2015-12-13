@@ -4,11 +4,6 @@
   ui:
     label: 'Asset directory'
     icon: 'icon-file'
-    inspector:
-      groups:
-        resources:
-          label: 'Resources'
-          position: 5
   properties:
     hideFilters:
       type: boolean
