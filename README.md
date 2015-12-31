@@ -14,7 +14,7 @@ Warning: This package is not stable yet. So use at your own risk!
 
 Run
 
-    composer require shel/mediafrontend:dev-master
+    composer require shel/mediafrontend
     
 Add dependency also to your site package.
     
