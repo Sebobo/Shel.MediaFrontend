@@ -1,0 +1,37 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace media=TYPO3\Media\ViewHelpers}
+<div{attributes -> f:format.raw()}>
+    <figure{f:if(condition: imageClassName, then: ' class="{imageClassName}"')}>
+    <f:if condition="{image}">
+        <f:then>
+            <f:if condition="{node.context.workspace.name} != 'live'">
+                <f:then>
+                    <f:render section="image" arguments="{_all}"/>
+                </f:then>
+                <f:else>
+                    <a href="{f:uri.resource(resource: image.resource)}" title="{title}" class="{linkClassName}">
+                        <f:render section="image" arguments="{_all}"/>
+                    </a>
+                </f:else>
+            </f:if>
+        </f:then>
+        <f:else>
+            <f:if condition="{neos:rendering.inEditMode()}">
+                <img src="{f:uri.resource(package: 'TYPO3.Neos', path: 'Images/dummy-image.svg')}" title="Dummy image"
+                     alt="Dummy image" class="neos-handle"/>
+            </f:if>
+        </f:else>
+    </f:if>
+    <f:if condition="{hasCaption}">
+        <figcaption>
+            {neos:contentElement.editable(property: 'caption', node: node)}
+        </figcaption>
+    </f:if>
+    </figure>
+</div>
+
+<f:section name="image">
+    <media:image asset="{image}" alt="{alternativeText}" title="{title}" width="{width}"
+                 maximumWidth="{maximumWidth}" height="{height}" maximumHeight="{maximumHeight}"
+                 allowUpScaling="{allowUpScaling}"/>
+</f:section>

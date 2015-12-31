@@ -1,0 +1,13 @@
+'Shel.MediaFrontend:GalleryImage':
+  superTypes:
+    'TYPO3.Neos.NodeTypes:Image': true
+    'TYPO3.Neos.NodeTypes:LinkMixin': false
+  ui:
+    group: shelMediaFrontend
+    label: i18n
+  properties:
+    hasCaption:
+      defaultValue: true
+      ui: ~
+    link:
+      ui: ~

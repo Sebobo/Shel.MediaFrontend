@@ -1,0 +1,15 @@
+prototype(Shel.MediaFrontend:GalleryColumn) < prototype(TYPO3.Neos:Content)  {
+    templatePath = 'resource://Shel.MediaFrontend/Private/Templates/NodeTypes/GalleryColumn.html'
+    attributes.class = 'container'
+    columns = TYPO3.Neos:ContentCollectionRenderer
+
+    prototype(Shel.MediaFrontend:GalleryImage) {
+        attributes.class = 'column'
+    }
+}
+
+prototype(Shel.MediaFrontend:GalleryTwoColumn) >
+prototype(Shel.MediaFrontend:GalleryTwoColumn) < prototype(Shel.MediaFrontend:GalleryColumn)
+
+prototype(Shel.MediaFrontend:GalleryThreeColumn) >
+prototype(Shel.MediaFrontend:GalleryThreeColumn) < prototype(Shel.MediaFrontend:GalleryColumn)

@@ -4,6 +4,11 @@ TYPO3:
       autoInclude:
         'Shel.MediaFrontend': true
 
+    userInterface:
+      translation:
+        autoInclude:
+          'Shel.MediaFrontend': ['NodeTypes/*']
+
     nodeTypes:
       groups:
         shelMediaFrontend:
@@ -19,3 +24,5 @@ Shel:
       pagination:
         itemsPerPage: 6
         maximumNumberOfLinks: 10
+
+    gallery:

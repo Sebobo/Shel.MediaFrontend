@@ -1,0 +1,31 @@
+'Shel.MediaFrontend:GalleryColumn':
+  superTypes:
+    'TYPO3.Neos:Content': true
+  abstract: true
+  ui:
+    group: shelMediaFrontend
+    label: i18n
+    icon: 'icon-columns'
+    inlineEditable: TRUE
+
+'Shel.MediaFrontend:GalleryTwoColumn':
+  superTypes:
+    'Shel.MediaFrontend:GalleryColumn': true
+  ui:
+    group: shelMediaFrontend
+    label: i18n
+  childNodes:
+    column1: &columnConfiguration
+      type: 'Shel.MediaFrontend:GalleryImage'
+    column2: *columnConfiguration
+
+'Shel.MediaFrontend:GalleryThreeColumn':
+  superTypes:
+    'Shel.MediaFrontend:GalleryColumn': true
+  ui:
+    group: shelMediaFrontend
+    label: i18n
+  childNodes:
+    column1: *columnConfiguration
+    column2: *columnConfiguration
+    column3: *columnConfiguration

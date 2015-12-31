@@ -1,0 +1,10 @@
+prototype(Shel.MediaFrontend:Gallery) < prototype(Content) {
+    configuration = ${Configuration.setting('Shel.MediaFrontend.gallery')}
+
+    attributes.class = 'media-frontend-gallery'
+    sectionName = 'Gallery'
+
+    tiles = TYPO3.Neos:ContentCollection {
+        nodePath = 'tiles'
+    }
+}

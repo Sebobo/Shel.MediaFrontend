@@ -1,0 +1,17 @@
+'Shel.MediaFrontend:Gallery':
+  superTypes:
+    'TYPO3.Neos:Content': true
+    'TYPO3.Neos.NodeTypes:TitleMixin': true
+  ui:
+    label: 'Gallery'
+    icon: 'icon-picture'
+  childNodes:
+    tiles:
+      type: 'TYPO3.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Shel.MediaFrontend:GalleryTwoColumn': true
+          'Shel.MediaFrontend:GalleryThreeColumn': true
+          'Shel.MediaFrontend:GalleryImage': true
+

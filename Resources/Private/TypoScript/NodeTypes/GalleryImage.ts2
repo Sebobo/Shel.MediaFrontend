@@ -1,0 +1,5 @@
+prototype(Shel.MediaFrontend:GalleryImage) < prototype(TYPO3.Neos.NodeTypes:Image) {
+    attributes.class = 'container column'
+    imageClassName = ${q(node).property('alignment') ? ('shel-mediafrontend-galleryimage--' + q(node).property('alignment')) : ''}
+    linkClassName = 'show-popup'
+}

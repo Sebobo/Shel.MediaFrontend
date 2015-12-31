@@ -3,7 +3,7 @@
     'Shel.MediaFrontend:AssetViewMixin': true
   ui:
     label: 'Asset directory'
-    icon: 'icon-file'
+    icon: 'icon-list-ul'
   properties:
     hideFilters:
       type: boolean
