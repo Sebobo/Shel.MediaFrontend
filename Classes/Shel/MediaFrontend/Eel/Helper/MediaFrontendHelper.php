@@ -9,7 +9,7 @@ namespace Shel\MediaFrontend\Eel\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Eel\ProtectedContextAwareInterface;
+use Neos\Eel\ProtectedContextAwareInterface;
 
 /**
  * Media Frontend helpers for Eel contexts

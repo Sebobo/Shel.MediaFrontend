@@ -8,9 +8,9 @@ namespace Shel\MediaFrontend\TypoScript\FlowQueryOperations;
  *                                                                        */
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
+use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\Eel\FlowQuery\FlowQuery;
+use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Persistence\QueryInterface;
 use TYPO3\Media\Domain\Model\AssetCollection;
 use TYPO3\Media\Domain\Repository\AssetCollectionRepository;
