@@ -1,14 +1,23 @@
 {
     "name": "shel/mediafrontend",
     "type": "neos-plugin",
+    "license": "MIT",
     "description": "Content elements and utilities for media in Neos CMS",
     "require": {
         "neos/neos": "~3.0",
         "neos/nodetypes": "~3.0"
     },
+    "authors": [
+        {
+            "name": "Sebastian Helzle",
+            "email": "sebastian@helzle.it",
+            "homepage": "https://www.helzle.it",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
-        "psr-0": {
-            "Shel\\MediaFrontend": "Classes"
+        "psr-4": {
+            "Shel\\MediaFrontend\\": "Classes"
         }
     },
     "extra": {

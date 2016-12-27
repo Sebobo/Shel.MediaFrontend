@@ -6,6 +6,11 @@ Shel:
         itemsPerPage: 6
         maximumNumberOfLinks: 10
 Neos:
+  Flow:
+    mvc:
+      routes:
+        Shel.MediaFrontend:
+          position: 'before Neos.Neos'
   Neos:
     nodeTypes:
       groups:

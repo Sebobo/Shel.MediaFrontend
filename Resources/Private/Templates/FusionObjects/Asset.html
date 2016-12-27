@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="https://neos.io/ns/Neos/Fluid/ViewHelpers">
+    <f:section name="Asset">
+        <li class="panel">
+            <p class="accordion__title h3">
+                <a href="{f:uri.resource(resource: asset.resource)}" title="Download" target="_blank">{asset.label}</a>
+            </p>
+            <div class="accordion__details">
+                <p>{asset.caption}</p>
+            </div>
+            <div class="accordion__tags">
+                <f:if condition="{asset.tags}">
+                    <strong>
+                        <i class="fa fa-flag"></i>
+                        <f:for each="{asset.tags}" as="tag" iteration="iterator">
+                            {tag.label}{f:if(condition: iterator.isLast, then: '', else: ', ')}
+                        </f:for>
+                    </strong>
+                </f:if>
+                <f:if condition="{assetCollections}">
+                    <strong>
+                        <i class="fa fa-comment"></i>
+                        <f:for each="{assetCollections}" as="assetCollection" iteration="iterator">
+                            {assetCollection.title}{f:if(condition: iterator.isLast, then: '', else: ', ')}
+                        </f:for>
+                    </strong>
+                </f:if>
+                <strong>
+                    {icon -> f:format.raw()}
+                    {asset.fileExtension -> f:format.case(mode: 'upper')}
+                </strong>
+                <strong class="pull-right">
+                    <time>{f:format.date(date: asset.lastModified, format: 'd/m/Y')}</time>
+                </strong>
+            </div>
+        </li>
+    </f:section>
+</html>

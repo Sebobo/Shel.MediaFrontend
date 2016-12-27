@@ -1,58 +1,61 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-			xmlns:ts="http://typo3.org/ns/TYPO3/TypoScript/ViewHelpers"
-			xmlns:neos="http://typo3.org/ns/TYPO3/Neos/ViewHelpers">
-	<f:section name="AssetDirectory">
-		<div{attributes -> f:format.raw()}>
-			<neos:contentElement.editable property="title" tag="h2" />
+      xmlns:f="https://neos.io/ns/Neos/Fluid/ViewHelpers"
+      xmlns:fluidadaptor="https://neos.io/ns/Neos/FluidAdaptor/ViewHelpers"
+      xmlns:neos="https://neos.io/ns/Neos/Neos/ViewHelpers"
+      xmlns:fusion="https://neos.io/ns/Neos/Fusion/ViewHelpers">
+    <f:section name="AssetDirectory">
+        <div{attributes -> f:format.raw()}>
+            <neos:contentElement.editable property="title" tag="h2" />
 
-			<f:if condition="{node.properties.hideFilters}">
-				<f:else>
-					<f:form actionUri="{neos:uri.node(node: '.')}" name="assetSearch" absolute="TRUE"
-									method="get" addQueryString="TRUE">
-						<div class="row">
-							<div class="form-group col-sm-4 col-xs-12">
-								<label for="tag">Tag</label>
-								<div class="select-wrapper">
-									<f:form.select id="tag" options="{tags}" prependOptionLabel="Select tag" sortByOptionLabel="TRUE"
-																 optionLabelField="label"
-																 property="tag" class="form-control" value="{selectedTag}" />
-								</div>
-							</div>
-							<div class="form-group col-sm-3 col-xs-8">
-								<label for="collection">Collection</label>
-								<div class="select-wrapper">
-									<f:form.select id="collection" options="{collections}" prependOptionLabel="Select collection"
-																 sortByOptionLabel="TRUE" property="collection" class="form-control"
-																 value="{selectedCollection}" />
-								</div>
-							</div>
+            <f:if condition="{node.properties.hideFilters}">
+                <f:else>
+                    <fluidadaptor:form actionUri="{neos:uri.node(node: '.')}" name="assetSearch" absolute="TRUE"
+                                    method="get" addQueryString="TRUE">
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-xs-12">
+                                <label for="tag">Tag</label>
+                                <div class="select-wrapper">
+                                    <fluidadaptor:form.select id="tag" options="{tags}" prependOptionLabel="Select tag" sortByOptionLabel="TRUE"
+                                                                 optionLabelField="label"
+                                                                 property="tag" class="form-control" value="{selectedTag}" />
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3 col-xs-8">
+                                <label for="collection">Collection</label>
+                                <div class="select-wrapper">
+                                    <fluidadaptor:form.select id="collection" options="{collections}" prependOptionLabel="Select collection"
+                                                                 sortByOptionLabel="TRUE" property="collection" class="form-control"
+                                                                 value="{selectedCollection}" />
+                                </div>
+                            </div>
 
-							<div class="form-group col-sm-1 col-xs-4">
-								<f:form.button class="btn btn-primary text-center" type="submit"><i class="fa fa-search"></i></f:form.button>
-							</div>
-						</div>
-					</f:form>
-				</f:else>
-			</f:if>
+                            <div class="form-group col-sm-1 col-xs-4">
+                                <fluidadaptor:form.button class="btn btn-primary text-center" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </fluidadaptor:form.button>
+                            </div>
+                        </div>
+                    </fluidadaptor:form>
+                </f:else>
+            </f:if>
 
-			<f:if condition="{rawAssetQuery}">
-				<f:then>
-					<f:widget.paginate objects="{rawAssetQuery}" as="paginatedAssets" widgetId="asset-directory-pagination"
-														 configuration="{configuration.pagination}">
-						<ul class="list-unstyled accordion" id="asset-directory">
-							<f:for each="{paginatedAssets}" as="asset">
-								<ts:render path="itemRenderer" context="{node: node, asset: asset}" />
-							</f:for>
-						</ul>
-					</f:widget.paginate>
-				</f:then>
-				<f:else>
-					<p>No results</p>
-				</f:else>
-			</f:if>
-		</div>
-	</f:section>
+            <f:if condition="{rawAssetQuery}">
+                <f:then>
+                    <fluidadaptor:widget.paginate objects="{rawAssetQuery}" as="paginatedAssets" widgetId="asset-directory-pagination"
+                                                         configuration="{configuration.pagination}">
+                        <ul class="list-unstyled accordion" id="asset-directory">
+                            <f:for each="{paginatedAssets}" as="asset">
+                                <fusion:render path="itemRenderer" context="{node: node, asset: asset}" />
+                            </f:for>
+                        </ul>
+                    </fluidadaptor:widget.paginate>
+                </f:then>
+                <f:else>
+                    <p>No results</p>
+                </f:else>
+            </f:if>
+        </div>
+    </f:section>
 </html>
 

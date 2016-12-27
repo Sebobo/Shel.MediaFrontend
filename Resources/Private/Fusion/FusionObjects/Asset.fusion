@@ -1,5 +1,5 @@
 prototype(Shel.MediaFrontend:Asset) < prototype(Content) {
-    templatePath = 'resource://Shel.MediaFrontend/Private/Templates/TypoScriptObjects/Asset.html'
+    templatePath = 'resource://Shel.MediaFrontend/Private/Templates/FusionObjects/Asset.html'
     sectionName = 'Asset'
 
     asset = ${asset}

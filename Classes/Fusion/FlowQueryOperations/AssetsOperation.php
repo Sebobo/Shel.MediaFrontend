@@ -1,5 +1,5 @@
 <?php
-namespace Shel\MediaFrontend\TypoScript\FlowQueryOperations;
+namespace Shel\MediaFrontend\Fusion\FlowQueryOperations;
 
 /*                                                                        *
  * This script belongs to the Flow package "Shel.MediaFrontend".          *

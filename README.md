@@ -1,7 +1,7 @@
 Shel.MediaFrontend
 ==================
 
-This is a extension package for Neos CMS 2.* and the TYPO3/Media package.
+This is a plugin for Neos CMS and the Neos/Media package.
 
 It allows you to import files from a folder into the Media management and contains some
 Neos content element for browsing media in the frontend.
@@ -21,18 +21,11 @@ Add dependency also to your site package.
 ### Dependencies
 
 See `composer.json`. Additionally the frontend uses `FontAwesome` by default. 
-But you can change this by overriding the TypoScript in your own package.
+But you can change this by overriding the Fusionobject in your own package.
     
-### Add route
+### Routing
 
-If you want to use the content elements add the following to `Configuration/Routes.yaml`:
-
-    -
-      name: 'Shel MediaFrontend'
-      uriPattern: '<ShelMediaFrontendSubroutes>'
-      subRoutes:
-        'ShelMediaFrontendSubroutes':
-          package: 'Shel.MediaFrontend'
+The routes for the content element pagination are auto-included in the `Settings.yaml`.
 
 ## Import files
 
