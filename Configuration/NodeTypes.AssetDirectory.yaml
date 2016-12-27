@@ -1,7 +1,7 @@
 
 'Shel.MediaFrontend:AssetDirectory':
   superTypes:
-    'Shel.MediaFrontend:AssetViewMixin': '1'
+    'Shel.MediaFrontend:AssetViewMixin': true
   ui:
     label: 'Asset directory'
     icon: icon-file
