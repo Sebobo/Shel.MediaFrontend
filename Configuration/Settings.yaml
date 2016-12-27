@@ -7,13 +7,13 @@ Shel:
         maximumNumberOfLinks: 10
 Neos:
   Neos:
-    typoScript:
-      autoInclude:
-        Shel.MediaFrontend: true
     nodeTypes:
       groups:
         shelMediaFrontend:
           label: 'Media frontend'
+    fusion:
+      autoInclude:
+        Shel.MediaFrontend: true
   Fusion:
     defaultContext:
       MediaFrontend: Shel\MediaFrontend\Eel\Helper\MediaFrontendHelper
