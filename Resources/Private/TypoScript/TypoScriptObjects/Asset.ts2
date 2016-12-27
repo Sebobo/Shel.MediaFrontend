@@ -7,11 +7,11 @@ prototype(Shel.MediaFrontend:Asset) < prototype(Content) {
     assetCollections = ${node.properties.selectableCollections ? MediaFrontend.intersectAssetCollections(node.properties.selectableCollections, asset.assetCollections) : asset.assetCollections}
 
     @context.mediaType = ${asset.mediaType}
-    icon = TYPO3.TypoScript:Tag {
+    icon = Neos.Fusion:Tag {
         tagName = 'i'
         attributes {
             title = ${mediaType}
-            class = TYPO3.TypoScript:Case {
+            class = Neos.Fusion:Case {
                 image {
                     condition = ${String.startsWith(mediaType, 'image')}
                     renderer = 'fa fa-file-image-o'
