@@ -1,21 +1,20 @@
+
 TYPO3:
-  Neos:
-    typoScript:
-      autoInclude:
-        'Shel.MediaFrontend': true
-
-    nodeTypes:
-      groups:
-        shelMediaFrontend:
-          label: 'Media frontend'
-
   TypoScript:
     defaultContext:
-      MediaFrontend: 'Shel\MediaFrontend\Eel\Helper\MediaFrontendHelper'
-
+      MediaFrontend: Shel\MediaFrontend\Eel\Helper\MediaFrontendHelper
 Shel:
   MediaFrontend:
     assetDirectory:
       pagination:
         itemsPerPage: 6
         maximumNumberOfLinks: 10
+Neos:
+  Neos:
+    typoScript:
+      autoInclude:
+        Shel.MediaFrontend: true
+    nodeTypes:
+      groups:
+        shelMediaFrontend:
+          label: 'Media frontend'
