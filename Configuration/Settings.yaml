@@ -1,8 +1,4 @@
 
-TYPO3:
-  TypoScript:
-    defaultContext:
-      MediaFrontend: Shel\MediaFrontend\Eel\Helper\MediaFrontendHelper
 Shel:
   MediaFrontend:
     assetDirectory:
@@ -18,3 +14,6 @@ Neos:
       groups:
         shelMediaFrontend:
           label: 'Media frontend'
+  Fusion:
+    defaultContext:
+      MediaFrontend: Shel\MediaFrontend\Eel\Helper\MediaFrontendHelper
