@@ -14,8 +14,8 @@ use RecursiveIteratorIterator;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Log\SystemLoggerInterface;
 use TYPO3\Flow\Persistence\PersistenceManagerInterface;
-use TYPO3\Flow\Resource\ResourceManager;
-use TYPO3\Flow\Resource\ResourceRepository;
+use TYPO3\Flow\ResourceManagement\ResourceManager;
+use TYPO3\Flow\ResourceManagement\ResourceRepository;
 use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\Media\Domain\Model\AssetCollection;
 use TYPO3\Media\Domain\Model\Audio;
@@ -106,7 +106,7 @@ class ImportAssetService
 
     /**
      * @param \SplFileInfo $file
-     * @throws \TYPO3\Flow\Resource\Exception
+     * @throws \TYPO3\Flow\ResourceManagement\Exception
      * @return bool|Asset
      */
     public function importAsset(\SplFileInfo $file)
