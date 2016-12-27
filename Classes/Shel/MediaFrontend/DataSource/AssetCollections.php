@@ -8,8 +8,8 @@ namespace Shel\MediaFrontend\DataSource;
  * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
-use TYPO3\Media\Domain\Model\AssetCollection;
-use TYPO3\Media\Domain\Repository\AssetCollectionRepository;
+use Neos\Media\Domain\Model\AssetCollection;
+use Neos\Media\Domain\Repository\AssetCollectionRepository;
 use TYPO3\Neos\Service\DataSource\AbstractDataSource;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;

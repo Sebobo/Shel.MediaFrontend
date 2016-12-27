@@ -10,7 +10,7 @@ namespace Shel\MediaFrontend\Command;
 use Shel\MediaFrontend\Service\ImportAssetService;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
-use TYPO3\Media\Domain\Model\Asset;
+use Neos\Media\Domain\Model\Asset;
 
 /**
  * @Flow\Scope("singleton")

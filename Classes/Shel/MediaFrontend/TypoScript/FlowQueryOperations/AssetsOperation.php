@@ -12,10 +12,10 @@ use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Flow\Annotations as Flow;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Persistence\QueryInterface;
-use TYPO3\Media\Domain\Model\AssetCollection;
-use TYPO3\Media\Domain\Repository\AssetCollectionRepository;
-use TYPO3\Media\Domain\Repository\AssetRepository;
-use TYPO3\Media\Domain\Repository\TagRepository;
+use Neos\Media\Domain\Model\AssetCollection;
+use Neos\Media\Domain\Repository\AssetCollectionRepository;
+use Neos\Media\Domain\Repository\AssetRepository;
+use Neos\Media\Domain\Repository\TagRepository;
 
 /**
  * EEL operation to fetch assets
@@ -198,7 +198,7 @@ class AssetsOperation extends AbstractOperation
         // Remove image variants as they are duplicates of normal image assets
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $query->getQueryBuilder();
-        $queryBuilder->andWhere('e NOT INSTANCE OF TYPO3\Media\Domain\Model\ImageVariant');
+        $queryBuilder->andWhere('e NOT INSTANCE OF Neos\Media\Domain\Model\ImageVariant');
 
         return $query->execute();
     }

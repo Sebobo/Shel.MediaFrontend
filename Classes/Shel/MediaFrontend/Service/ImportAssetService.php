@@ -16,14 +16,14 @@ use Neos\Flow\Log\SystemLoggerInterface;
 use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Flow\ResourceManagement\ResourceManager;
 use Neos\Flow\ResourceManagement\ResourceRepository;
-use TYPO3\Media\Domain\Model\Asset;
-use TYPO3\Media\Domain\Model\AssetCollection;
-use TYPO3\Media\Domain\Model\Audio;
-use TYPO3\Media\Domain\Model\Document;
-use TYPO3\Media\Domain\Model\Image;
-use TYPO3\Media\Domain\Model\Video;
-use TYPO3\Media\Domain\Repository\AssetCollectionRepository;
-use TYPO3\Media\Domain\Repository\AssetRepository;
+use Neos\Media\Domain\Model\Asset;
+use Neos\Media\Domain\Model\AssetCollection;
+use Neos\Media\Domain\Model\Audio;
+use Neos\Media\Domain\Model\Document;
+use Neos\Media\Domain\Model\Image;
+use Neos\Media\Domain\Model\Video;
+use Neos\Media\Domain\Repository\AssetCollectionRepository;
+use Neos\Media\Domain\Repository\AssetRepository;
 
 /**
  * A service for importing files as assets for the media browser
