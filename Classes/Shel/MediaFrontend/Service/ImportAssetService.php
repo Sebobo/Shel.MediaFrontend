@@ -11,11 +11,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Connection;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Log\SystemLoggerInterface;
-use TYPO3\Flow\Persistence\PersistenceManagerInterface;
-use TYPO3\Flow\ResourceManagement\ResourceManager;
-use TYPO3\Flow\ResourceManagement\ResourceRepository;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Log\SystemLoggerInterface;
+use Neos\Flow\Persistence\PersistenceManagerInterface;
+use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Flow\ResourceManagement\ResourceRepository;
 use TYPO3\Media\Domain\Model\Asset;
 use TYPO3\Media\Domain\Model\AssetCollection;
 use TYPO3\Media\Domain\Model\Audio;
@@ -86,7 +86,7 @@ class ImportAssetService
     protected $importedAssetCollection = null;
 
     /**
-     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      * @return AssetCollection
      */
     public function getImportedAssetCollection()
@@ -106,7 +106,7 @@ class ImportAssetService
 
     /**
      * @param \SplFileInfo $file
-     * @throws \TYPO3\Flow\ResourceManagement\Exception
+     * @throws \Neos\Flow\ResourceManagement\Exception
      * @return bool|Asset
      */
     public function importAsset(\SplFileInfo $file)

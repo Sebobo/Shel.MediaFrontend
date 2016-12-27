@@ -9,9 +9,9 @@ namespace Shel\MediaFrontend\TypoScript\FlowQueryOperations;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use TYPO3\Eel\FlowQuery\FlowQuery;
-use TYPO3\Flow\Persistence\QueryInterface;
+use Neos\Flow\Persistence\QueryInterface;
 use TYPO3\Media\Domain\Model\AssetCollection;
 use TYPO3\Media\Domain\Repository\AssetCollectionRepository;
 use TYPO3\Media\Domain\Repository\AssetRepository;
@@ -151,7 +151,7 @@ class AssetsOperation extends AbstractOperation
      * @param AssetCollection $mainCollection
      * @param array $tags
      * @param array <AssetCollection> $subCollections
-     * @return \TYPO3\Flow\Persistence\QueryResultInterface
+     * @return \Neos\Flow\Persistence\QueryResultInterface
      */
     protected function findAssets(
       $searchTerm,
