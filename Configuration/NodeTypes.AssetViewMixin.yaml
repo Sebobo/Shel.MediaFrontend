@@ -3,7 +3,7 @@
   abstract: true
   superTypes:
     'TYPO3.Neos:Content': true
-    'TYPO3.Neos.NodeTypes:TitleMixin': true
+    'Neos.NodeTypes:TitleMixin': true
   ui:
     group: shelMediaFrontend
     inspector:
