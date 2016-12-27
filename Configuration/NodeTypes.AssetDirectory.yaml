@@ -1,14 +1,15 @@
+
 'Shel.MediaFrontend:AssetDirectory':
   superTypes:
-    'Shel.MediaFrontend:AssetViewMixin': true
+    'Shel.MediaFrontend:AssetViewMixin': '1'
   ui:
     label: 'Asset directory'
-    icon: 'icon-file'
+    icon: icon-file
   properties:
     hideFilters:
       type: boolean
       ui:
-        label: Hide filters
+        label: 'Hide filters'
         reloadIfChanged: true
         inspector:
           group: resources
@@ -21,11 +22,11 @@
         inspector:
           group: resources
           position: 20
-          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editor: Content/Inspector/Editors/SelectBoxEditor
           editorOptions:
             multiple: false
             placeholder: 'Choose main collection'
-            dataSourceIdentifier: 'shel-mediafrontend-assetcollections'
+            dataSourceIdentifier: shel-mediafrontend-assetcollections
     selectableCollections:
       type: array
       ui:
@@ -35,6 +36,6 @@
           group: resources
           position: 30
           editorOptions:
-            multiple: TRUE
+            multiple: true
             placeholder: 'Choose filterable collections'
-            dataSourceIdentifier: 'shel-mediafrontend-assetcollections'
+            dataSourceIdentifier: shel-mediafrontend-assetcollections
