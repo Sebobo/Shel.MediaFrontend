@@ -91,7 +91,7 @@ class AssetsOperation extends AbstractOperation
         }
 
         // Retrieve main assetcollection from repository by its title
-        if (isset($arguments[1]) && $arguments !== '') {
+        if (isset($arguments[1]) && !empty($arguments[1])) {
             $mainCollection = $this->assetCollectionRepository->findByTitle($arguments[1])->getFirst();
 
             if ($mainCollection === null) {
