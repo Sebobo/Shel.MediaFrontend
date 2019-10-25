@@ -12,16 +12,18 @@ Warning: This package is not stable yet. So use at your own risk!
 
 ### Add composer package
 
-Run
+Run the following command in your site package:
 
-    composer require shel/mediafrontend
+    composer require --no-update shel/mediafrontend
     
-Add dependency also to your site package.
+Then run the following command in your project root:
+
+    composer update
     
 ### Dependencies
 
 See `composer.json`. Additionally the frontend uses `FontAwesome` by default. 
-But you can change this by overriding the Fusionobject in your own package.
+But you can change this by overriding the Fusion objects in your own package.
     
 ### Routing
 

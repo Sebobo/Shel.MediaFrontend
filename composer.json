@@ -1,11 +1,12 @@
 {
     "name": "shel/mediafrontend",
     "type": "neos-plugin",
-    "license": "MIT",
+    "license": "GPL-3.0-or-later",
     "description": "Content elements and utilities for media in Neos CMS",
     "require": {
-        "neos/neos": "~3.0 || ~4.0",
-        "neos/nodetypes": "~3.0 || ~4.0"
+        "neos/neos": "~3.3 || ~4.3",
+        "neos/nodetypes": "~3.3 || ~4.3",
+        "neos/fusion-afx": "~1.3"
     },
     "authors": [
         {

@@ -1,2 +1,1 @@
-include: FusionObjects/*.fusion
-include: NodeTypes/*.fusion
+include: **/*.fusion

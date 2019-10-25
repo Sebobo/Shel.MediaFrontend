@@ -1,4 +1,4 @@
-prototype(Shel.MediaFrontend:AssetDirectory) < prototype(Content) {
+prototype(Shel.MediaFrontend:AssetDirectory) < prototype(Neos.Neos:Content) {
     configuration = ${Configuration.setting('Shel.MediaFrontend.assetDirectory')}
 
     attributes.class = 'directory container area'

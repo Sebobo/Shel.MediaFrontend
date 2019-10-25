@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace Shel\MediaFrontend\Fusion\FlowQueryOperations;
 
 /*                                                                        *
- * This script belongs to the Flow package "Shel.MediaFrontend".          *
+ * This script belongs to the Neos package "Shel.MediaFrontend".          *
  *                                                                        *
  * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
@@ -11,7 +13,9 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Flow\Annotations as Flow;
 use Neos\Eel\FlowQuery\FlowQuery;
+use Neos\Flow\Persistence\Exception\InvalidQueryException;
 use Neos\Flow\Persistence\QueryInterface;
+use Neos\Flow\Persistence\QueryResultInterface;
 use Neos\Media\Domain\Model\AssetCollection;
 use Neos\Media\Domain\Repository\AssetCollectionRepository;
 use Neos\Media\Domain\Repository\AssetRepository;
@@ -78,13 +82,14 @@ class AssetsOperation extends AbstractOperation
      * @param FlowQuery $flowQuery the FlowQuery object
      * @param array $arguments the arguments for this operation
      * @return mixed
+     * @throws \Exception
      */
-    public function evaluate(FlowQuery $flowQuery, array $arguments)
+    public function evaluate(FlowQuery $flowQuery, array $arguments): void
     {
         $searchWord = '';
-        $tags = array();
+        $tags = [];
         $mainCollection = null;
-        $subCollections = array();
+        $subCollections = [];
 
         if (isset($arguments[0]) && !empty($arguments[0])) {
             $searchWord = $arguments[0];
@@ -104,7 +109,7 @@ class AssetsOperation extends AbstractOperation
             if (is_array($arguments[2])) {
                 $tags = $arguments[2];
             } else {
-                $tags = array($arguments[2]);
+                $tags = [$arguments[2]];
             }
 
             $tagRepository = $this->tagRepository;
@@ -119,7 +124,7 @@ class AssetsOperation extends AbstractOperation
             if (is_array($arguments[3])) {
                 $subCollections = $arguments[3];
             } else {
-                $subCollections = array($arguments[3]);
+                $subCollections = [$arguments[3]];
             }
             $assetCollectionRepository = $this->assetCollectionRepository;
             $subCollections = array_map(function ($value) use ($assetCollectionRepository) {
@@ -150,15 +155,16 @@ class AssetsOperation extends AbstractOperation
      * @param string $searchTerm
      * @param AssetCollection $mainCollection
      * @param array $tags
-     * @param array <AssetCollection> $subCollections
-     * @return \Neos\Flow\Persistence\QueryResultInterface
+     * @param array $subCollections
+     * @return QueryResultInterface
+     * @throws InvalidQueryException
      */
     protected function findAssets(
       $searchTerm,
       AssetCollection $mainCollection = null,
       $tags = array(),
       array $subCollections = array()
-    ) {
+    ): QueryResultInterface {
         /** @var QueryInterface $query */
         $query = $this->assetRepository->createQuery();
 

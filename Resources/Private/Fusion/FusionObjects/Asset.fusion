@@ -1,44 +1,77 @@
-prototype(Shel.MediaFrontend:Asset) < prototype(Content) {
-    templatePath = 'resource://Shel.MediaFrontend/Private/Templates/FusionObjects/Asset.html'
-    sectionName = 'Asset'
-
+prototype(Shel.MediaFrontend:Asset) < prototype(Neos.Neos:ContentComponent) {
     asset = ${asset}
+    mediaType = ${this.asset.mediaType}
+    selectableCollections = ${q(node).property('selectableCollections')}
+
     # Only show collections in the frontend which are also in the facet
-    assetCollections = ${node.properties.selectableCollections ? MediaFrontend.intersectAssetCollections(node.properties.selectableCollections, asset.assetCollections) : asset.assetCollections}
+    assetCollections = ${this.selectableCollections ? MediaFrontend.intersectAssetCollections(this.selectableCollections, this.asset.assetCollections) : this.asset.assetCollections}
 
-    @context.mediaType = ${asset.mediaType}
-    icon = Neos.Fusion:Tag {
-        tagName = 'i'
-        attributes {
-            title = ${mediaType}
-            class = Neos.Fusion:Case {
-                image {
-                    condition = ${String.startsWith(mediaType, 'image')}
-                    renderer = 'fa fa-file-image-o'
-                }
+    renderer = Neos.Fusion:Component {
+        @apply.props = ${props}
 
-                video {
-                    condition = ${String.startsWith(mediaType, 'video')}
-                    renderer = 'fa fa-file-video-o'
-                }
+        iconClass = Neos.Fusion:Case {
+            image {
+                condition = ${String.startsWith(props.mediaType, 'image')}
+                renderer = 'fa fa-file-image-o'
+            }
 
-                audio {
-                    condition = ${String.startsWith(mediaType, 'audio')}
-                    renderer = 'fa fa-file-audio-o'
-                }
+            video {
+                condition = ${String.startsWith(props.mediaType, 'video')}
+                renderer = 'fa fa-file-video-o'
+            }
 
-                pdf {
-                    condition = ${String.endsWith(mediaType, 'pdf')}
-                    renderer = 'fa fa-file-pdf-o'
-                }
+            audio {
+                condition = ${String.startsWith(props.mediaType, 'audio')}
+                renderer = 'fa fa-file-audio-o'
+            }
 
-                default {
-                    condition = TRUE
-                    renderer = 'fa fa-file-o'
-                    @position = 'end'
-                }
+            pdf {
+                condition = ${String.endsWith(props.mediaType, 'pdf')}
+                renderer = 'fa fa-file-pdf-o'
+            }
+
+            default {
+                condition = true
+                renderer = 'fa fa-file-o'
+                @position = 'end'
             }
         }
+
+        renderer = afx`
+            <li class="panel">
+                <p class="accordion__title h3">
+                    <a title={'Download ' + props.asset.label} target="_blank">
+                        <Neos.Fusion:ResourceUri resource={props.asset.resource} @path="attributes.href"/>
+                        {props.asset.label}
+                    </a>
+                </p>
+                <div class="accordion__details">
+                    <p>{props.asset.caption}</p>
+                </div>
+                <div class="accordion__tags">
+                    <strong @if.hasTags={props.asset.tags}>
+                        <i class="fa fa-flag"></i>&nbsp;
+                        <Neos.Fusion:Loop items={props.asset.tags} itemName="tag" iteration="iterator" @glue=", ">
+                            {tag.label}
+                        </Neos.Fusion:Loop>
+                    </strong>
+                    <strong @if.hasCollections={props.assetCollections}>
+                        <i class="fa fa-comment"></i>&nbsp;
+                        <Neos.Fusion:Loop items={props.assetCollections} itemName="assetCollection"
+                                          iteration="iterator" @glue=", ">
+                            {assetCollection.title}
+                        </Neos.Fusion:Loop>
+                    </strong>
+                    <strong>
+                        <i title={props.mediaType} class={props.iconClass}></i>&nbsp;
+                        {String.toUpperCase(props.asset.fileExtension)}
+                    </strong>
+                    <strong class="pull-right">
+                        <time>{Date.format(asset.lastModified, 'd/m/Y')}</time>
+                    </strong>
+                </div>
+            </li>
+        `
     }
 
     @cache {
