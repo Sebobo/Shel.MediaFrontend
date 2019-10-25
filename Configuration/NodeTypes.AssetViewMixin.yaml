@@ -1,25 +1,26 @@
+
 'Shel.MediaFrontend:AssetViewMixin':
   abstract: true
   superTypes:
-    'TYPO3.Neos:Content': true
-    'TYPO3.Neos.NodeTypes:TitleMixin': true
+    'Neos.Neos:Content': true
+    'Neos.NodeTypes:TitleMixin': true
   ui:
     group: shelMediaFrontend
     inspector:
       groups:
         resources:
-          label: 'Resources'
+          label: Resources
           position: 5
   properties:
     mainCollection:
       type: string
       ui:
         label: 'Main asset collection'
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
           group: resources
-          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editor: Content/Inspector/Editors/SelectBoxEditor
           editorOptions:
-            multiple: FALSE
+            multiple: false
             placeholder: 'Choose main collection'
-            dataSourceIdentifier: 'shel-mediafrontend-assetcollections'
+            dataSourceIdentifier: shel-mediafrontend-assetcollections

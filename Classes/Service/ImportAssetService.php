@@ -1,29 +1,30 @@
 <?php
+declare(strict_types=1);
+
 namespace Shel\MediaFrontend\Service;
 
 /*                                                                        *
- * This script belongs to the Flow package "Shel.MediaFrontend".          *
+ * This script belongs to the Neos package "Shel.MediaFrontend".          *
  *                                                                        *
  * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\DBAL\Connection;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Log\SystemLoggerInterface;
-use TYPO3\Flow\Persistence\PersistenceManagerInterface;
-use TYPO3\Flow\Resource\ResourceManager;
-use TYPO3\Flow\Resource\ResourceRepository;
-use TYPO3\Media\Domain\Model\Asset;
-use TYPO3\Media\Domain\Model\AssetCollection;
-use TYPO3\Media\Domain\Model\Audio;
-use TYPO3\Media\Domain\Model\Document;
-use TYPO3\Media\Domain\Model\Image;
-use TYPO3\Media\Domain\Model\Video;
-use TYPO3\Media\Domain\Repository\AssetCollectionRepository;
-use TYPO3\Media\Domain\Repository\AssetRepository;
+use Neos\Flow\Persistence\Exception\IllegalObjectTypeException;
+use Neos\Media\Exception\AssetServiceException;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Log\SystemLoggerInterface;
+use Neos\Flow\Persistence\PersistenceManagerInterface;
+use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Flow\ResourceManagement\ResourceRepository;
+use Neos\Media\Domain\Model\Asset;
+use Neos\Media\Domain\Model\AssetCollection;
+use Neos\Media\Domain\Model\Audio;
+use Neos\Media\Domain\Model\Document;
+use Neos\Media\Domain\Model\Image;
+use Neos\Media\Domain\Model\Video;
+use Neos\Media\Domain\Repository\AssetCollectionRepository;
+use Neos\Media\Domain\Repository\AssetRepository;
 
 /**
  * A service for importing files as assets for the media browser
@@ -44,11 +45,6 @@ class ImportAssetService
      * @var ObjectManager
      */
     protected $entityManager;
-
-    /**
-     * @var Connection
-     */
-    protected $dbalConnection;
 
     /**
      * @Flow\Inject
@@ -86,10 +82,10 @@ class ImportAssetService
     protected $importedAssetCollection = null;
 
     /**
-     * @throws \TYPO3\Flow\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
      * @return AssetCollection
      */
-    public function getImportedAssetCollection()
+    public function getImportedAssetCollection(): AssetCollection
     {
         $collectionName = 'Imported';
         if ($this->importedAssetCollection == null) {
@@ -106,8 +102,8 @@ class ImportAssetService
 
     /**
      * @param \SplFileInfo $file
-     * @throws \TYPO3\Flow\Resource\Exception
      * @return bool|Asset
+     * @throws IllegalObjectTypeException
      */
     public function importAsset(\SplFileInfo $file)
     {
@@ -160,11 +156,12 @@ class ImportAssetService
      * @param $path
      * @param bool $simulate
      * @param \Closure $callback
+     * @throws IllegalObjectTypeException
      */
-    public function importAssetFolder($path, $simulate = false, \Closure $callback = null)
+    public function importAssetFolder(string $path, $simulate = false, \Closure $callback = null)
     {
         $directory = new \RecursiveDirectoryIterator($path, \FilesystemIterator::FOLLOW_SYMLINKS);
-        $filter = new \RecursiveCallbackFilterIterator($directory, function ($current, $key, $iterator) {
+        $filter = new \RecursiveCallbackFilterIterator($directory, function ($current) {
             /** @var \SplFileInfo $current */
             // Skip hidden files and directories.
             if ($current->getFilename()[0] === '.') {
@@ -201,8 +198,10 @@ class ImportAssetService
     /**
      * @param $simulate
      * @param \Closure $callback
+     * @throws IllegalObjectTypeException
+     * @throws AssetServiceException
      */
-    public function removeImportedAssets($simulate, \Closure $callback = null)
+    public function removeImportedAssets(bool $simulate, \Closure $callback = null): void
     {
         $assetCollection = $this->getImportedAssetCollection();
         $assets = $assetCollection->getAssets();

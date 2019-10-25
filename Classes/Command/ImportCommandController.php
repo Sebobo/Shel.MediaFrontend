@@ -1,16 +1,20 @@
 <?php
+declare(strict_types=1);
+
 namespace Shel\MediaFrontend\Command;
 
 /*                                                                        *
- * This script belongs to the Flow package "Shel.MediaFrontend".          *
+ * This script belongs to the Neos package "Shel.MediaFrontend".          *
  *                                                                        *
  * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
+use Neos\Flow\Persistence\Exception\IllegalObjectTypeException;
+use Neos\Media\Exception\AssetServiceException;
 use Shel\MediaFrontend\Service\ImportAssetService;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Cli\CommandController;
-use TYPO3\Media\Domain\Model\Asset;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Cli\CommandController;
+use Neos\Media\Domain\Model\Asset;
 
 /**
  * @Flow\Scope("singleton")
@@ -33,8 +37,9 @@ class ImportCommandController extends CommandController
      *
      * @param string $path The folder which the files should be read from
      * @param boolean $simulate If set, this command will only tell what it would do instead of doing it right away
+     * @throws IllegalObjectTypeException
      */
-    public function filesCommand($path, $simulate = false)
+    public function filesCommand(string $path, bool $simulate = false): void
     {
         $path = realpath($path);
         $this->outputFormatted("Importing assets from %s", array($path));
@@ -58,8 +63,10 @@ class ImportCommandController extends CommandController
      * Completely removes previously imported resources from asset management
      *
      * @param boolean $simulate
+     * @throws IllegalObjectTypeException
+     * @throws AssetServiceException
      */
-    public function purgeCommand($simulate = false)
+    public function purgeCommand(bool $simulate = false): void
     {
         $this->importAssetService->removeImportedAssets($simulate, function ($assetsRemoved, $simulate) {
             if ($simulate) {

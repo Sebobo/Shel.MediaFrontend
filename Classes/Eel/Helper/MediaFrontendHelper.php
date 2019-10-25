@@ -1,15 +1,17 @@
 <?php
+declare(strict_types=1);
+
 namespace Shel\MediaFrontend\Eel\Helper;
 
 /*                                                                        *
- * This script belongs to the Flow package "Shel.MediaFrontend".          *
+ * This script belongs to the Neos package "Shel.MediaFrontend".          *
  *                                                                        *
  * @author Sebastian Helzle <sebastian@helzle.it>                         *
  *                                                                        */
 
 use Doctrine\Common\Collections\Collection;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Eel\ProtectedContextAwareInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Eel\ProtectedContextAwareInterface;
 
 /**
  * Media Frontend helpers for Eel contexts
@@ -24,9 +26,9 @@ class MediaFrontendHelper implements ProtectedContextAwareInterface
      *
      * @param array $availableCollections The available collection titles as strings
      * @param Collection $assetCollections The assets selected collections as AssetCollections
-     * @return array The array with intersected AssetCollections
+     * @return \Traversable The array with intersected AssetCollections
      */
-    public function intersectAssetCollections($availableCollections, Collection $assetCollections)
+    public function intersectAssetCollections($availableCollections, Collection $assetCollections): \Traversable
     {
         return $assetCollections->filter(function ($collection) use ($availableCollections) {
             return in_array($collection->getTitle(), $availableCollections);

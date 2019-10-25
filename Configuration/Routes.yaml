@@ -2,7 +2,7 @@
   name: 'Asset directory paginate'
   uriPattern: '{node}/documents-page/{--asset-directory-pagination.currentPage}.html'
   defaults:
-    '@package': 'TYPO3.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@action': 'show'
     '@format': 'html'
@@ -14,6 +14,6 @@
       'currentPage': '1'
   routeParts:
     node:
-      handler: TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandler
   appendExceedingArguments: TRUE
 
