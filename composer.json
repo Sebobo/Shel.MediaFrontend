@@ -4,8 +4,8 @@
     "license": "MIT",
     "description": "Content elements and utilities for media in Neos CMS",
     "require": {
-        "neos/neos": "~3.0",
-        "neos/nodetypes": "~3.0"
+        "neos/neos": "~3.0 || ~4.0",
+        "neos/nodetypes": "~3.0 || ~4.0"
     },
     "authors": [
         {
